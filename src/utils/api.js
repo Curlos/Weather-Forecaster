@@ -1,9 +1,11 @@
 const GEOCODING_ACCESS_TOKEN = process.env.REACT_APP_GEOCODING_ACCESS_TOKEN
-const BASE_API_URL = `https://api.mapbox.com/geocoding/v5/mapbox.places`
+const WEATHER_API_KEY = process.env.REACT_APP_WEATHER_API_KEY
+const BASE_GEOCODING_API_URL = `https://api.mapbox.com/geocoding/v5/mapbox.places`
+const BASE_WEATHER_API_URL = `https://api.openweathermap.org/data/2.5/onecall`
 
 
 export const getCoordsFromAPI = async (locationText) => {
-    let API_URL = `${BASE_API_URL}/${locationText}.json?access_token=${GEOCODING_ACCESS_TOKEN}`
+    let API_URL = `${BASE_GEOCODING_API_URL}/${locationText}.json?access_token=${GEOCODING_ACCESS_TOKEN}`
     let response = await fetch(API_URL)
     let data = await response.json()
     
@@ -11,4 +13,14 @@ export const getCoordsFromAPI = async (locationText) => {
     let latitude = data.features[0].center[1]
 
     return [latitude, longitude]
+}
+
+export const getWeatherDataFromAPI = async (latitude, longitude) => {
+    let API_URL = `${BASE_WEATHER_API_URL}?lat=${latitude}&lon=${longitude}&appid=${WEATHER_API_KEY}`
+    let response = await fetch(API_URL)
+    let data = await response.json()
+
+    console.log(API_URL)
+
+    console.log(data)
 }
