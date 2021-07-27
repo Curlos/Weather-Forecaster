@@ -41,7 +41,7 @@ const App = () => {
       <div className="weatherInfo">
         {sevenDayWeatherInfo.map((day) => {
           return (
-            <DailyWeather day={day} />
+            <DailyWeather day={day} className="dailyWeather"/>
           )
         })}
       </div>

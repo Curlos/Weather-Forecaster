@@ -1,0 +1,11 @@
+.dailyWeather {
+    display:inline-block;
+    min-height: 150px;
+    max-width: 100px;
+    border-radius: 10px;
+    margin: 1px;
+}
+
+.dailyWeather:active {
+    background-color: #5596F6;
+}

@@ -1,3 +1,9 @@
+import './dailyWeather.css';
+
+const handleClick = () => {
+    
+}
+
 const DailyWeather = ({day}) => {
     return (
         <div key={day.dt} className="dailyWeather">
@@ -7,7 +13,6 @@ const DailyWeather = ({day}) => {
             Icon: <img src={'http://openweathermap.org/img/wn/' + day.weather[0].icon + '@2x.png'} alt={day.weather[0].main}/> 
             Humidity: {day.humidity}  
             Wind Speed: {day.wind_speed}
-            <br></br>
         </div>
     )
 }
