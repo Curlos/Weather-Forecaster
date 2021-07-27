@@ -1,31 +1,37 @@
 import React, { useState, useEffect } from 'react';
+import {convertFromKelvinToCelsius, convertFromKelvinToFarenheit} from './utils/tempConverter'
 import { getCoordsFromAPI, getWeatherDataFromAPI } from './utils/api';
 import './style.css';
 
 const App = () => {
-  const [location, setLocation] = useState('')
+  const [location, setLocation] = useState('London')
 
-  useEffect(() => {
-    const fetchFromApi = async () => {
-      const coords = await getCoordsFromAPI('Los Angeles')
-      const latitude = coords[0]
-      const longitude = coords[1]
+  const fetchFromApi = async () => {
+    const coords = await getCoordsFromAPI(location)
 
+    const latitude = coords[0]
+    const longitude = coords[1]
+    console.log([latitude, longitude])
+    const data = await getWeatherDataFromAPI(latitude, longitude)
 
+    console.log(data)
+  }
 
-      const data = await getWeatherDataFromAPI(latitude, longitude)
+  const handleChange = (event) => {
+    setLocation(event.target.value)
+  }
 
-      console.log(data)
-    }
-
+  const handleClick = (event) => {
     fetchFromApi()
-  }, [])
+  }
+
   
 
   return (
     <div className="App">
       Weather Forecaster
-      <input type="text"></input>
+      <input type="text" className="locationInput" id="locationInput" onChange={handleChange}></input>
+      <button onClick={handleClick}></button>
     </div>
   );
 }
