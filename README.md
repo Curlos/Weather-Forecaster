@@ -4,7 +4,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/Curlos/Weather-Forecaster">
-    <img src="/public/dice.png" alt="Logo" width="80" height="80">
+    <img src="/public/cloudy.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Weather Forecaster</h3>
