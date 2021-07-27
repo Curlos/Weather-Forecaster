@@ -12,7 +12,7 @@ export const getCoordsFromAPI = async (locationText) => {
     
     let longitude = data.features[0].center[0]
     let latitude = data.features[0].center[1]
-    
+
     return [latitude, longitude]
 }
 
@@ -21,7 +21,5 @@ export const getWeatherDataFromAPI = async (latitude, longitude) => {
     let response = await fetch(API_URL)
     let data = await response.json()
 
-    console.log(API_URL)
-
-    console.log(data)
+    return data.daily
 }

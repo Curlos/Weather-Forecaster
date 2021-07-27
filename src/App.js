@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import {convertFromKelvinToCelsius, convertFromKelvinToFarenheit} from './utils/tempConverter'
 import { getCoordsFromAPI, getWeatherDataFromAPI } from './utils/api';
+import DailyWeather from './components/DailyWeather';
+import CurrentWeather from './components/CurrentWeather';
 import './style.css';
 
 const App = () => {
   const [location, setLocation] = useState('London')
+  const [sevenDayWeatherInfo, setSevenDayWeatherInfo] = useState([])
 
   const fetchFromApi = async () => {
     const coords = await getCoordsFromAPI(location)
@@ -14,24 +17,34 @@ const App = () => {
     console.log([latitude, longitude])
     const data = await getWeatherDataFromAPI(latitude, longitude)
 
-    console.log(data)
+    return data
   }
 
   const handleChange = (event) => {
     setLocation(event.target.value)
   }
 
-  const handleClick = (event) => {
-    fetchFromApi()
+  const handleClick = async () => {
+    const dailyData = await fetchFromApi()
+    console.log('info:')
+    console.log(dailyData)
+    setSevenDayWeatherInfo(dailyData)
   }
-
   
 
   return (
     <div className="App">
-      Weather Forecaster
+      Your city: 
       <input type="text" className="locationInput" id="locationInput" onChange={handleChange}></input>
-      <button onClick={handleClick}></button>
+      <button onClick={handleClick}>Get forecast</button>
+
+      <div className="weatherInfo">
+        {sevenDayWeatherInfo.map((day) => {
+          return (
+            <DailyWeather day={day} />
+          )
+        })}
+      </div>
     </div>
   );
 }
